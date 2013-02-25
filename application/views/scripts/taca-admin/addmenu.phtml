@@ -1,0 +1,33 @@
+ <?php if (!empty($this->errorsMessages)): ?>
+    <div class="alert alert-error">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    			        <?php
+                            foreach ($this->errors as $key => $error):
+                        ?>
+    				<?php if (!empty($error)): ?>
+    				<div>
+    				<strong>
+    				    <?php echo $this->addmenuform->getElement($key)->getLabel()." : "; ?>
+    				 </strong>
+    				<?php foreach ($error as $e): ?>
+    					<?php echo $this->errorsMessages[$key][$e]; ?>
+    				<?php endforeach; ?>
+    				</div>
+    				<?php endif; ?>
+    				<?php endforeach; ?>
+     
+     </div>
+   <?php endif; ?>
+
+
+<form id="add_new_menu_form" action="" method="post" class="form-horizontal">
+	
+		<?php 
+			echo $this->addmenuform->menu_name_add; 
+			echo $this->addmenuform->menu_type; 
+			echo $this->addmenuform->menu_type_values; 
+			echo $this->addmenuform->menu_type_values_url; 
+			echo $this->addmenuform->add_menu; 
+		?>
+	
+</form>

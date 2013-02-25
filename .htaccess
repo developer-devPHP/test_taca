@@ -1,0 +1,90 @@
+SetEnv APPLICATION_ENV development
+
+AddType text/x-component .htc
+RewriteEngine On
+
+#RewriteBase "/~LOGIN/ZendStarter"
+#RewriteBase "/~tikoxtec"
+#RewriteCond %{REQUEST_URI} !public/
+#RewriteRule (.*) /public/$1 [L]
+
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+RewriteRule ^.*$ index.php [NC,L]
+
+Options -Indexes
+
+<files .htaccess>
+order allow,deny
+deny from all
+</files>
+
+#Блокируем плохих ботов и роботов
+SetEnvIfNoCase user-Agent ^FrontPage [NC,OR]
+SetEnvIfNoCase user-Agent ^Java.* [NC,OR]
+SetEnvIfNoCase user-Agent ^Microsoft.URL [NC,OR]
+SetEnvIfNoCase user-Agent ^MSFrontPage [NC,OR]
+SetEnvIfNoCase user-Agent ^Offline.Explorer [NC,OR]
+SetEnvIfNoCase user-Agent ^[Ww]eb[Bb]andit [NC,OR]
+SetEnvIfNoCase user-Agent ^Zeus [NC]
+<limit get="" post="" head="">
+Order Allow,Deny
+Allow from all
+Deny from env=bad_bot
+</limit>
+
+#Сжимаем элементы с помощью mod_deflate
+<ifmodule mod_deflate.c>
+<filesmatch .(js|css)$="">
+SetOutputFilter DEFLATE
+</filesmatch>
+</ifmodule>
+
+#Усиливаем кеширование
+FileETag MTime Size
+<ifmodule mod_expires.c>
+<filesmatch ".(jpe?g|gif|png|css|js)$">
+ExpiresActive on
+
+</filesmatch>
+</ifmodule>
+
+#Сжимаем компоненты сайта путем включения Gzip
+AddOutputFilterByType DEFLATE text/html text/plain text/xml application/xml application/xhtml+xml text/javascript text/css application/x-javascript
+BrowserMatch ^Mozilla/4 gzip-only-text/html
+BrowserMatch ^Mozilla/4.0[678] no-gzip
+BrowserMatch bMSIE !no-gzip !gzip-only-text/html
+
+#Включаем отслеживание сим-ссылок
+Options +FollowSymLinks
+#Запускаем url_rewriting
+
+#Блокируем все ссылки, содержащие <script>
+RewriteCond %{QUERY_STRING} (\<|%3C).*script.*(\>|%3E) [NC,OR]
+#Блокируем все скрипты, которые пытаются изменить переменные PHP Globals:
+RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
+#Блокируем все скрипты, которые пытаются изменить переменную _REQUEST:
+RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2})
+#Перенаправляем все подобные на страницу с ошибкой 403 — запрещено
+RewriteRule ^(.*)$ index.php [F,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f 
+RewriteCond %{REQUEST_FILENAME} !-d 
+
+SetEnvIfNoCase Referer "^$" local_ref=1
+# Allowed domains
+# Далее разрешенные домены
+SetEnvIfNoCase Referer "^http://(www\.)?seua\.am" local_ref=1
+SetEnvIfNoCase Referer "^http://(www\.)?localhost" local_ref=1
+SetEnvIfNoCase Referer "^http://(www\.)?50.22.87.126" local_ref=1
+SetEnvIfNoCase Referer "^http://(www\.)?127.0.0.1" local_ref=1
+#SetEnvIfNoCase Referer "^http://(www\.)?domain\.com" local_ref=1
+# File extensions that you want to protect
+# Расширения файлов, которые нужно защитить
+<FilesMatch "\.(bmp|jpe?g|gif|png|css|js)">
+Order Allow,Deny
+Allow from env=local_ref
+</FilesMatch>
+

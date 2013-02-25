@@ -1,0 +1,159 @@
+<?php echo $this->doctype("XHTML1_STRICT"); ?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<?php
+
+echo $this->headMeta();
+echo $this->headTitle();
+/*
+ * this->headLink(array('rel' => 'icon', 'type'=>'image/x-icon', 'href' =>
+ * $this->baseUrl('/public/images/favicon.ico')), 'PREPEND');
+ */
+$this->headLink()->appendStylesheet($this->baseUrl('/public/admin/admin.css'),
+        'screen');
+
+$this->headLink()->appendStylesheet(
+        $this->baseUrl('/public/js_css_plugins/bootstrap/css/bootstrap.min.css'), 
+        'screen');
+
+$this->headLink()->appendStylesheet(
+        $this->baseUrl('/public/js_css_plugins/jquery_ui/vader/jquery-ui-1.9.2.min.css'), 
+        'screen');
+$this->headLink()->appendStylesheet(
+        $this->baseUrl('/public/admin/css/site_map.css'), 
+        'screen');
+$this->headLink()->appendStylesheet(
+        $this->baseUrl('/public/admin/admin_forms.css'), 
+        'screen');
+
+$this->headScript()->appendFile(
+        $this->baseUrl('/public/js/jquery-1.8.3.min.js'));
+$this->headScript()->appendFile(
+        $this->baseUrl('/public/js_css_plugins/bootstrap/js/bootstrap.min.js'));
+
+$this->headScript()->appendFile(
+        $this->baseUrl('/public/js_css_plugins/jquery_ui/jquery-ui-1.9.2.min.js'));
+$this->headScript()->appendFile(
+        $this->baseUrl('/public/js_css_plugins/jquery_ui/jquery.ui.touch-punch.js'));
+$this->headScript()->appendFile(
+        $this->baseUrl('/public/js_css_plugins/other/jquery.json-2.3.js'));
+/*$this->headScript()->appendFile(
+        $this->baseUrl('/public/admin/js/hs_draggable.js'));*/
+$this->headScript()->appendFile(
+        $this->baseUrl('/public/admin/admin_js.js'));
+
+$this->headScript()->appendFile($this->baseUrl('/public/js_css_plugins/ckeditor/ckeditor.js'),'text/javascript',array('charset' => 'utf-8'));
+echo $this->headLink ();
+echo $this->headScript();
+
+$this->headLink()->exchangeArray(array());
+$this->headScript()->exchangeArray(array());
+?>
+<?php 
+
+$current_action = Zend_Controller_Front::getInstance()->getRequest()->getActionName();
+
+
+?>
+</head>
+<body>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		        </a> 
+				<a class="brand" href="#">Project name</a>
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						<li class="<?php if ($current_action == 'main') echo 'active' ?>"><a href="#">Home</a></li>
+						<li class="dropdown <?php if ($current_action == 'addmenu' || $current_action == 'menusorting') echo 'active'; ?>">
+						     <a href="#" class="dropdown-toggle"
+							data-toggle="dropdown"><?php echo $this->translate('Menus'); ?> <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+							    <li class="nav-header">Add</li>
+								<li class="<?php if ($current_action == 'addmenu') echo 'active' ?>">
+								    <a href="<?php echo $this->url(array('action'=>'addmenu','lang'=>Zend_Registry::get('Zend_Locale')),'my_admin_route',true) ?>"> <i class="icon-plus"></i> Add new menu</a>
+								</li>
+								<li class="divider"></li>
+								<li class="nav-header">Sorting</li>
+								<li class="<?php if ($current_action == 'menusorting') echo 'active' ?>">
+								    <a href="<?php echo $this->url(array('action'=>'menusorting','lang'=>Zend_Registry::get('Zend_Locale')),'my_admin_route',true) ?>"> <i class="icon-edit"></i> Sorting menu</a>
+							    </li>
+							</ul>
+						</li>
+						<li class="dropdown  <?php if ($current_action == 'addcontent') echo 'active'; ?>">
+							<a href="#" class="dropdown-toggle"
+								data-toggle="dropdown">Content <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li class="<?php if ($current_action == 'addcontent') echo 'active' ?>">
+									<a href="<?php echo $this->url(array('action'=>'addcontent','lang'=>Zend_Registry::get('Zend_Locale')),'my_admin_route',true) ?>">Add new content</a>
+								</li>
+							</ul>
+						</li>
+						<li class="dropdown">
+						    <a href="#" class="dropdown-toggle"
+							data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="#">Action</a></li>
+								<li><a href="#">Another action</a></li>
+								<li><a href="#">Something else here</a></li>
+								<li class="divider"></li>
+								<li class="nav-header">Nav header</li>
+								<li><a href="#">Separated link</a></li>
+								<li class="dropdown-submenu">
+									<a href="#">More</a>
+									<ul class="dropdown-menu">
+										<li><a href="#">Something else here</a></li>
+										<li><a href="#">Action</a></li>
+										<li><a href="#">Another action</a></li>
+										<li><a href="#">Something else here</a></li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<li class="dropdown">
+						    <a href="#" class="dropdown-toggle"
+							data-toggle="dropdown"><?php echo $this->translate('Current lang').' ('. Zend_Registry::get('Zend_Locale').') '; ?> <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+							    <?php  foreach ($this->layout()->all_languages as $lang): ?>
+								<li><a href="<?php echo $this->url(array('lang'=>"{$lang['lang_short_name']}"),'my_admin_route'); ?>"><?php echo $lang['lang_full_name']." ( ".$lang['lang_short_name']." ) ";  ?></a></li>
+								<?php endforeach; ?>
+							</ul>
+						</li>
+					</ul>
+					<div class="navbar-form pull-right">
+    					<div class="pull-left" style="margin-right: 10px;">
+    					 <a class="btn btn-inverse" target="_blank" href="<?php echo $this->url(array('action'=>'index','lang'=>Zend_Registry::get('Zend_Locale')),'my_custom_default',true) ?>">
+    					     <i class="icon-eye-open icon-white"></i> View Site</a>
+    					</div>
+    					<div class="btn-group pull-left">
+    						<a class="btn btn-inverse" href="#"><i
+    							class="icon-user icon-white"></i> <?php echo $this->translate('Administrator'); ?></a> <a
+    							class="btn btn-inverse dropdown-toggle" data-toggle="dropdown"
+    							href="#"><span class="caret"></span></a>
+    						<ul class="dropdown-menu">
+    							<li><a href="#"><i class="icon-pencil"></i> Edit</a></li>
+    							<li><a href="#"><i class="icon-trash"></i> Delete</a></li>
+    							<li><a href="#"><i class="icon-ban-circle"></i> Ban</a></li>
+    							<li class="divider"></li>
+    							<li><a href="<?php echo $this->url(array('action'=>'logout', 'lang'=>Zend_Registry::get('Zend_Locale')),null,true) ?>"><i class="icon-off"></i> Log Out </a></li>
+    						</ul>
+    					</div>
+					</div>
+				
+					
+				</div>
+				<!--/.nav-collapse -->
+			</div>
+		</div>
+	</div>
+	<div class="container">
+	     <?php echo $this->layout()->content; ?>
+	</div>
+
+
+</body>
+</html>

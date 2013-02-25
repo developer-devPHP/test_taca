@@ -1,0 +1,205 @@
+body {
+	font-family: 'lucida grande',tahoma,verdana,arial,sans-serif !important;
+	font-size: 15px;
+	background: url("../images/body_bg.png") repeat;
+}
+
+#center {
+	width: 66.9em;
+	margin: 10px auto;
+}
+
+#top_bar {
+	margin-bottom: 0.6em;
+}
+
+#top_bar .languge_bar {
+	float: right;
+	background: #cfdbe2;
+	padding: 0.1em 0 0.2em 0;
+	margin-left: 0.4em;
+	display: block;
+	height: 1.8em;
+}
+
+#top_bar .languge_bar li {
+	float: left;
+	border-right: 1px solid white;
+	padding: 0px 5px 0px 5px;
+	margin-top: 2px;
+}
+
+#top_bar .languge_bar li a {
+	color: #919191;
+	text-decoration: none;
+	font-weight: bold;
+	float: left;
+	padding: 5px;
+	display: block;
+}
+
+#top_bar .languge_bar li a:hover,#top_bar .languge_bar .lang_select {
+	background: #23426f;
+	color: white;
+	cursor: pointer;
+}
+
+#top_bar .languge_bar li a img {
+	width: 21px;
+	height: 21px;
+	position: relative;
+	float: left;
+	display: block;
+	margin: -3px 7px 0px 0px;
+}
+
+#top_bar .login_reg_bar {
+	background: #cfdbe2;
+	float: right;
+	padding: 2px 0px 3px 0px;
+	margin-right: 5px;
+	display: block;
+	height: 30px;
+}
+
+#top_bar .login_reg_bar li {
+	float: left;
+	border-right: 1px solid white;
+	padding: 0px 5px 0px 5px;
+	margin-top: 7px;
+}
+
+#top_bar .login_reg_bar li a {
+	color: #919191;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+#top_bar .login_reg_bar li a:hover {
+	text-decoration: underline;
+}
+
+#site_content_bar {
+	background: white;
+	padding-top: 5px;
+	padding-bottom: 40px;
+}
+#header_bar{
+	background: url("../images/header_bg.jpg") no-repeat;
+	height: 165px;
+}
+#header_bar .logo {
+	float: left;
+	width: 183px;
+	height: 145px;
+	margin: 20px 0px 0px 16px;
+}
+
+#header_bar .top_right_info {
+	position: relative;
+	float: left;
+	margin: 10px 0px 0px 40px;
+}
+
+#header_bar .top_right_info h2,#header_bar .top_right_info h3 {
+	font-size: 17px;
+	margin-bottom: 10px;
+}
+
+#header_bar .top_right_info h2 a {
+	text-decoration: none;
+	color: #104c70;
+	margin-left: 20px;
+}
+
+#header_bar .top_right_info h3 a {
+	text-decoration: none;
+	color: #104c70;
+	margin-left: 10px;
+}
+
+#header_bar .top_right_info h1 {
+	font-size: 22px;
+	color: white;
+	width: 600px;
+}
+
+.top_menu {
+	position: absolute;
+	top: 115px;
+	left: 13px;
+}
+/*
+.top_menu>ul>li {
+	float: left;
+}
+
+.top_menu>ul>li>a {
+	display: block;
+	padding: 10px;
+	margin-right: 10px;
+	color: white;
+	text-decoration: none;
+}
+.top_menu>ul>li>a:hover, .top_menu_select{
+	background: red;
+	cursor: pointer;
+} 
+
+.top_menu li ul {
+	position: absolute;
+	display: none;
+	margin: -7px 0 0 -1px;
+	padding: 0;
+	list-style: none;
+	background: #62bae4;
+	z-index: 9999;
+}
+
+.top_menu li ul li {
+	width: 160px;
+	margin-bottom: 5px;
+	padding-bottom: 5px;
+	border-bottom: 1px solid #3590ba;
+}
+*/
+/* display block will make the link fill the whole area of LI */
+/*.top_menu>ul>li li a {
+	display: block;
+	color: #112b3d;
+	margin: 10px 5px 0px 5px;
+	padding: 5px 5px 5px 10px;
+	text-decoration: none;
+}
+
+.top_menu>ul>li li a:hover, .top_submenu_select{
+	background: #3593be;
+	color: white !important;
+	cursor: pointer;
+}*/
+
+.left_column,.right_column {
+	float: left;
+}
+
+.left_column {
+	width: 235px;
+	min-height: 20px;
+	margin-left: 20px;
+}
+
+.right_column {
+	margin-left: 20px;
+	margin-right: 5px;
+	width: 715px;
+}
+
+/*  Other styles  */
+#login_form_box {
+	display: none;
+}
+
+.clear {
+	clear: both;
+	overflow: hidden;
+}

@@ -1,0 +1,114 @@
+<?php $send_url = $this->url(array('action'=>'selectmenutypevalue'),'my_admin_ajax',true); ?>
+<script type="text/javascript">
+<!--
+jQuery(function($){
+	$('#menu_type_values').parents('.control-group').css('display','none');
+	$('#menu_type_values_url').parents('.control-group').css('display','none');
+	
+	$('#menu_type').live('change',function(){
+		type_id = parseInt($(this).val(),10);
+		if(type_id !='' && !isNaN(type_id))
+		{
+			if(type_id !=5 )
+			{
+				if(type_id !=6)
+				{
+					$('#menu_type_values_url-label').parent('tr').css('display','none');
+					$.ajax({
+						  url: '<?php echo $send_url; ?>',
+						  type: 'POST',
+						  dataType: 'json',
+						  data: {menu_type:type_id},
+						  success: function(getdata){
+							  var options = '';
+							  var  i;
+							  switch (type_id) 
+							  {
+							  	case 1:
+									for(i=0; i<getdata.length; i++)
+									  {
+										  options += '<option value="' + getdata[i].site_page_ID + '">' + getdata[i].page_name + '</option>';
+									  }
+								break;
+							  	case 2:
+							  		for(i=0; i<getdata.length; i++)
+									  {
+										  options += '<option value="' + getdata[i].cat_ID + '">' + getdata[i].cat_name + '</option>';
+									  }
+							  		break;
+							  	case 3:
+							  		for(i=0; i<getdata.length; i++)
+									  {
+										  options += '<option value="' + getdata[i].site_content_id + '">' + getdata[i].content_title + '</option>';
+									  }
+							  		break;
+							  	case 4:
+							  		for(i=0; i<getdata.length; i++)
+									  {
+										  options += '<option value="' + getdata[i].special_action_ID + '">' + getdata[i].action_description + '</option>';
+									  }
+								  	break;
+								default:
+									alert('some problem page must be reload');
+									document.location.reload(true);
+									break;
+							  }
+							  
+							  $('select#menu_type_values').html(options);
+							  $('#menu_type_values_url').val('');
+							  $('#menu_type_values_url').parents('.control-group').css('display','none');
+							  $('#menu_type_values').parents('.control-group').removeAttr('style');
+							  
+						  },
+						  error :function() {
+							  $('#menu_type_values option').remove();
+							  $('#menu_type_values').parents('.control-group').css('display','none');
+
+							  $('#menu_type_values_url').val('');
+							  $('#menu_type_values_url').parents('.control-group').css('display','none');
+								
+							  alert('error try agane');
+							  document.location.reload(true);
+						  }
+						});
+				}
+				else
+				{
+					$('#menu_type_values option').remove();
+					$('#menu_type_values').parents('.control-group').css('display','none');
+
+					$('#menu_type_values_url').val('');
+					$('#menu_type_values_url').parents('.control-group').css('display','none');
+				}
+			}
+			else
+			{
+				$('#menu_type_values option').remove();
+				$('#menu_type_values').parents('.control-group').css('display','none');
+				
+				$('#menu_type_values_url').parents('.control-group').removeAttr('style');
+			}
+		}
+		else
+		{
+			$('#menu_type_values option').remove();
+			$('#menu_type_values').parents('.control-group').css('display','none');
+
+			$('#menu_type_values_url').val('');
+			$('#menu_type_values_url').parents('.control-group').css('display','none');
+		}
+	});
+	var menu_type = $('#menu_type').val();
+	if(menu_type !='')
+	{
+		$('#menu_type').trigger('change');	
+	}
+
+	$('#add_new_menu_form input:submit').live('click',function(){
+		type_id = parseInt($('#menu_type').val(),10);
+		alert(type_id);
+		return false;
+	});
+});
+//-->
+</script>

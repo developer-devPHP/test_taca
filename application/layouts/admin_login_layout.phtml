@@ -1,0 +1,39 @@
+<?php echo $this->doctype("XHTML1_STRICT"); ?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<?php
+echo $this->headMeta();
+echo $this->headTitle();
+/*
+ * this->headLink(array('rel' => 'icon', 'type'=>'image/x-icon', 'href' =>
+ * $this->baseUrl('/public/images/favicon.ico')), 'PREPEND');
+ */
+
+$this->headLink()->appendStylesheet(
+        $this->baseUrl('/public/js_css_plugins/bootstrap/css/bootstrap.min.css'), 
+        'screen');
+$this->headLink()->appendStylesheet(
+        $this->baseUrl('/public/admin/admin_forms.css'), 
+        'screen');
+
+$this->headScript()->appendFile(
+        $this->baseUrl('/public/js/jquery-1.8.3.min.js'));
+$this->headScript()->appendFile(
+        $this->baseUrl('/public/js_css_plugins/bootstrap/js/bootstrap.min.js'));
+
+$this->headScript()->appendFile(
+        $this->baseUrl('/public/admin/admin_befor_login.js'));
+
+echo $this->headLink();
+echo $this->headScript();
+
+$this->headLink()->exchangeArray(array());
+$this->headScript()->exchangeArray(array());
+?>
+</head>
+<body>
+	<div class="container">
+	     <?php echo $this->layout()->content; ?>
+	</div>
+</body>
+</html>

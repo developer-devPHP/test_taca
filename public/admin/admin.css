@@ -1,0 +1,14 @@
+body
+{
+	padding-top: 60px;
+	/*padding-bottom: 40px;*/
+}
+
+.collapse{
+	position: static !important;
+}
+
+#sitemap i{
+	float: left;
+	margin-left: 50px;
+}

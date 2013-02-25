@@ -1,0 +1,37 @@
+<?php 
+$contents = $this->all_content;
+$count = sizeof($contents);
+$i = 0;
+?>
+<?php while ($i < $count): ?>
+<div class="home_slider">    
+    <div class="news_slide_body">
+        <h1> <a href="#"><?php echo $contents[$i]['cat_name']; ?></a> </h1>
+        <div class='news_slides_container'>
+            <?php for ($k=0;$k<3;$k++): ?>
+            <div class="news_slide">
+                <?php for ($j=0;$j<2;$j++): ?>
+                <div class="news_slider_content">
+                    <a href="#" class="news_slider_content_link">
+                        <?php 
+                        
+                        ?>
+                        <img alt="" src="<?php echo $this->baseUrl('/public/images/2.jpg'); ?>">
+                    </a>
+                    <h4> <a href="#">Քառուղիներից անհայտ </a> </h4>
+                   <?php
+                   $str = "<p>Մենք մեր մասին  ամսագիրը հիմնադրվել է 2004թ  Մայիսի 26-ին տեռստ</p>"; 
+                   $str = strip_tags($str);
+                       echo mb_substr($str,0,63,'UTF-8'); 
+                   ?>
+                   ... <a href="#">Ավելին</a>
+                </div>
+               <?php endfor; ?>
+            </div>
+            <?php endfor; ?>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+
+<?php $i++; endwhile; ?>

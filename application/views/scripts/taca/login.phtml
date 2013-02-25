@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<?php 
+$this->headLink()->appendStylesheet(
+		$this->baseUrl('/public/js_css_plugins/bootstrap/css/bootstrap.min.css'),
+		'screen');
+/*$this->headLink()->appendStylesheet(
+		$this->baseUrl('/public/js_css_plugins/jquery_ui/vader/jquery-ui-1.9.1.custom.css'),
+		'screen');*/
+
+$this->headScript()->appendFile(
+        $this->baseUrl('/public/js/jquery-1.8.2.min.js'));
+$this->headScript()->appendFile(
+        $this->baseUrl('/public/js_css_plugins/bootstrap/js/bootstrap.min.js'));
+
+/*$this->headScript()->appendFile(
+        $this->baseUrl('/public/js_css_plugins/jquery_ui/jquery-ui-1.9.1.custom.js'));
+$this->headScript()->appendFile(
+        $this->baseUrl('/public/js_css_plugins/jquery_ui/jquery.ui.touch-punch.js'));*/
+
+echo $this->headLink();
+echo $this->headScript();
+
+$this->headLink()->exchangeArray(array());
+$this->headScript()->exchangeArray(array());
+
+?>
+<body>
+<?php if (!empty($this->errorsMessages)): ?>
+    <div class="alert alert-error">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    			        <?php
+                            foreach ($this->errors as $key => $error):
+                        ?>
+    				<?php if (!empty($error)): ?>
+    				<div>
+    				<strong>
+    				    <?php echo $this->login_form->getElement($key)->getLabel()." : "; ?>
+    				 </strong>
+    				<?php foreach ($error as $e): ?>
+    					<?php echo $this->errorsMessages[$key][$e]; ?>
+    				<?php endforeach; ?>
+    				</div>
+    				<?php endif; ?>
+    				<?php endforeach; ?>
+     
+     </div>
+   <?php endif; ?>
+<?php
+echo $this->login_form;
+
+?>
+</body>
+</html>
