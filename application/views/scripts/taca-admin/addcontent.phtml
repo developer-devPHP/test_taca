@@ -63,13 +63,8 @@
 
 	CKEDITOR.replace( 'content',
 					{
-    		    		resize_enabled: false,
 						toolbar : 'Admin',
-						language: '{$lang}',
-						skin : 'moono',
-						fullPage : false,
-						extraPlugins: 'codemirror'
-						
+						language: '{$lang}'
 					});
 ";
 		$this->headScript()->appendScript($editor_about_us_arm);
